@@ -1,0 +1,119 @@
+import os
+def TelaPrincipal():
+    global interacao
+    print('''
+    
+        ===== Projeto Calculadora =====
+    
+        \n\t+Encerrar programa ------- [0]
+    \t+Descrição sobre o projeto e seu produtor ----- [1])
+    \t+Calculadora --- [2] )
+    ''')
+    interacao = int(input('\tDigite: '))
+    os.system('cls')
+        
+    
+    
+def TelaDescricao():
+    print("""                                                                     
+                        DESCRIÇÃO DO PROJETO                      
+                                                                  
+       DESENVOLVEDRO: PEDRO LUCAS AZEVEDO                           
+       DATA: 28/09/23                                               
+       INSTITUIÇÃO: UNIFIP                                          
+       PROFESSOR: SORMMANY                                          
+                                                                     
+                       RESUMO DO PROJETO                              
+                                                                      
+             Calculadora basica capaz de executar as 4                
+             operações matematicas como:adição, subtração             
+             divisão, mutiplicação. Como também elaborar             
+              a tabuada de qualquer valor.                                                  
+ """)
+    
+   
+    os.system('pause')
+    os.system('cls')
+
+def TelaCalculadora():
+    global equacao
+    global resultado
+
+    print('''
+    === Calculadora Python ===
+    
+    
+    =========================================================
+    
+    +SOMA <----------------> [+]
+    +Subtração <-----------> [-]
+    +Multiplicação <-------> [*]
+    +Divisão <-------------> [/]
+    +Potenciação <---------> [**]
+    +Retornara o menu <----> [R]
+    
+    Digite a operação conforme o padrão:[4/2**+9(2-3)]
+
+   
+    =========================================================''')
+    
+    equacao = input('\t     Digite aqui: ')
+    
+    
+    resultado = 0
+        
+    try:
+        resultado = eval(equacao)
+        os.system('cls')
+            
+    except:
+        print('Erro ao calcular a equação.')
+
+def TelaDeResultado():
+    global resultado
+    if resultado != 0:  
+        print()
+        print('\t==============================================')
+        print()
+        print(f'\tO resultado é: {resultado}')
+        print()
+        print('\t==============================================')
+        print()
+        os.system('pause')
+        os.system('cls')
+
+def Tabuada():
+    print('\t==============================================')
+    print()
+    print('\tIMPRIMA A TABUADA DE QUALQUER VALOR DESEJADO')
+    print()
+    print('\t==============================================')
+    print()
+    numero_tabuada = int(input('Digite o valor desejado: '))
+
+    contador = 1
+    while contador <= 10:  
+        print(f"{numero_tabuada} x {contador} = {numero_tabuada*contador}")
+        contador += 1
+    os.system('pause')
+    os.system('cls')
+
+
+while True:
+    
+    TelaPrincipal()    
+    if interacao == 0:
+        print('programa encerrado')
+        break
+    elif interacao == 1:
+        TelaDescricao()
+        os.system('cls')
+    
+    elif interacao == 2:
+        TelaCalculadora()
+        os.system('cls')
+        if equacao == 'R':
+            os.system('pause')
+            os.system('cls')
+        else:
+            TelaDeResultado()
