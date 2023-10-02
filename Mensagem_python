@@ -1,0 +1,113 @@
+import os
+import pywhatkit
+import phonenumbers
+from phonenumbers import geocoder
+import datetime
+
+
+def TelaPrincipal():
+    print('===== Projeto Mensagem =====')
+    print('\n\t  +Descrição sobre o projeto e seu produtor ----- [1]')
+    print('\t  +Cadastrar número ------------------------------ [2]')
+    print('\t  +Enviar Mensagem ------------------------------ [3]')
+    print('\t  +Dados de localização do numero ------------------ [4]')
+    print('\t  +Encerrar programa ----------------------------- [0]')
+
+def Localizacao():
+    global numeroparseado
+    numeroparseado = phonenumbers.parse(numero_telefone, None)
+    descricao = geocoder.description_for_number(numeroparseado, "pt")
+    print(f'Este número: {numero_telefone} é de {descricao}')
+
+def Descricao():
+    print('''               
+            === DESCRIÇÃO SOBRE O PROJETO ===
+          
+
+    DESENVOLVEDOR: PEDRO LUCAS AZEVEDO
+    DATA: 28/09/23
+    INSTITUIÇÃO: UNIFIP
+    PROFESSOR: SORMMANY
+          
+                RESUMO SOBRE O PROJETO
+          
+    O projeto trata-se de um programa capaz de enviar mensagens
+    para qualquer numero  através do whatsapp web. O programa
+    também mostra a localização média de onde o numero é
+
+          
+''')
+    
+
+
+
+
+def CadastroNumero():
+    global numero_telefone
+    print('-' * 10)
+    print('\n\tDigite o número seguindo o padrão:')
+    print('\t(+país)(estado)(número) Exemplo: +5583123456789')
+    print('\n\tOBS: para que essa biblioteca funcione, é necessário WhatsApp Web')
+    numero_telefone = input('Digite seu número: ')
+    print('-' * 10)
+    numero_lido = 0
+    try:
+        numero_lido = phonenumbers.parse(numero_telefone, None)
+        print('Número valido, cadastrado com sucesso')
+        return numero_lido
+    except:
+        print('Numero invalido, verifique se o numero foi digitado corretamente')
+
+def EnviarMensagem():
+   
+    print('\n\tDigite a mensagem que deseja enviar:')
+    mensagem = input('Mensagem: ')
+    
+    numeroparseado = phonenumbers.parse(numero_telefone, None)
+
+    
+
+    hora_atual = datetime.datetime.now().hour
+    minuto_atual = datetime.datetime.now().minute
+
+
+    try:
+        pywhatkit.sendwhatmsg(numero_telefone, mensagem, hora_atual, minuto_atual + 1)
+       
+
+    except:
+        print('Ocorreu um erro')
+        
+
+    
+
+
+
+while True:
+    TelaPrincipal()
+    interacao = int(input('Digite: '))
+    os.system('cls')
+
+    if interacao == 1:
+        Descricao()
+        os.system('pause')
+        os.system('cls')
+
+    elif interacao == 2:
+        CadastroNumero()
+        os.system('pause')
+        os.system('cls')
+        
+    elif interacao == 3:
+        EnviarMensagem()
+    
+    elif interacao == 4:
+        Localizacao()
+        os.system('pause')
+        os.system('cls')
+    
+    
+    elif interacao == 0:
+        break
+        
+print('Programa encerrado')
